@@ -1,0 +1,26 @@
+<h1><%= @restaurant.name %></h1>
+<p><%= @restaurant.category %></p>
+<p><%= @restaurant.address %></p>
+<p><%= @restaurant.phone_number %></p>
+<hr>
+<div class="d-flex justify-content-between align-items-center">
+  <h2>Reviews</h2>
+  <%= link_to "Add a new review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
+</div>
+
+<div class="cards">
+  <% @restaurant.reviews.each do |review| %>
+  <div class="card d-flex justify-content-between">
+    <p><%= review.content %></p>
+    <p><%= review.rating %></p>
+  </div>
+  <% end %>
+</div>
+
+<hr>
+<h2>Add a new review</h2>
+<%= simple_form_for [ @restaurant, @review ] do |f| %>
+  <%= f.input :content %>
+  <%= f.input :rating %>
+  <%= f.submit "Submit review", class: "btn btn-primary" %>
+<% end %>
